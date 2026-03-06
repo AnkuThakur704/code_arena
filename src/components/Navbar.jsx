@@ -149,6 +149,12 @@ export default function Navbar() {
                       >
                         Alumni
                       </Link>
+                       <Link
+                        href="/CodeArena"
+                        className="hover:text-gray-400 md:text-2xl text-xl"
+                      >
+                        CodeArena'26
+                      </Link>
                     </div>
                     <div className="md:hidden">
                       <button
