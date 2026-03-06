@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./css/CodeArena.css"; 
-
+import AboutCompetition from "./aboutCA"
+import Sponsors from "./sponsors"
 const inter = Inter({ subsets: ["latin"] });
 
 export default function CodeArena() {
@@ -9,7 +10,7 @@ export default function CodeArena() {
       <div className="relative z-20 flex min-h-screen flex-col px-6 py-12 md:px-16 md:py-20">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-12 gap-10">
           
-          {/* Left Column: Content */}
+          {/* before cards */}
           <div className="md:col-span-7 flex flex-col items-start gap-8 mt-10 md:mt-20">
             
             <div className="space-y-2">
