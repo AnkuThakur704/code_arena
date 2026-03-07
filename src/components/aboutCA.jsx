@@ -4,6 +4,7 @@ import { Zap, BrainCircuit, BarChart3, Trophy } from 'lucide-react';
 export default function AboutCompetition() {
   return (
     <section className="relative w-full py-24 px-6 md:px-16 overflow-hidden">
+
       
       <div className="max-w-6xl mx-auto">
 
@@ -13,9 +14,13 @@ export default function AboutCompetition() {
             About The <span className="text-orange-500">Arena</span>
           </h2>
           <p className="text-zinc-500 mt-4 text-lg max-w-2xl mx-auto">
+
             A battlefield for logic, speed, and precision. Only the sharpest minds rise to the top.
           </p>
+
+          <div className="h-[2px] w-24 bg-cyan-500 mx-auto mt-6 opacity-40"></div>
         </div>
+
 
         {/* WRAPPER FOR MAIN CARD FLOATING */}
         <div className="float-main-card">
@@ -26,6 +31,7 @@ export default function AboutCompetition() {
              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-cyan-500/30 rounded-br-2xl" />
 
             <div className="grid md:grid-cols-2 gap-10 items-center">
+
 
               {/* Left Text (Paragraph) */}
               <div className="space-y-6 text-zinc-300 leading-relaxed text-lg">
@@ -49,6 +55,7 @@ export default function AboutCompetition() {
                   ready to prove their coding skills.
                 </p>
               </div>
+
 
               {/* Right Feature List */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -77,6 +84,7 @@ export default function AboutCompetition() {
                   floatClass="float-box-4"
                 />
               </div>
+
 
             </div>
           </div>
