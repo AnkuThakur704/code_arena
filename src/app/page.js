@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <>
       <CodeArena/>
-      <AboutCompetition/>
       <Countdown/>
+      <AboutCompetition/>
       <PrizePool/>
       <Sponsors/>
       <Footer/>

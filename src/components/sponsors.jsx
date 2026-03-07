@@ -6,11 +6,11 @@ export default function Sponsors() {
 
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-white">
-            Our Sponsors
+          <h2 className="text-4xl md:text-6xl font-black text-white mb-2">
+            Our <span className="text-orange-500">Sponsors</span>
           </h2>
 
-          <p className="text-cyan-400/80 mt-4 text-lg max-w-2xl mx-auto">
+          <p className="text-zinc-500 mt-4 text-lg max-w-2xl mx-auto">
             Code Arena is supported by organizations that believe in innovation,
             competitive spirit, and the future of technology.
           </p>

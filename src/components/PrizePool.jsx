@@ -44,10 +44,10 @@ const PrizePool = () => {
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-2 uppercase italic">
-            PRIZE <span className="text-orange-500">POOL</span>
+          <h2 className="text-4xl md:text-6xl font-black text-white mb-2">
+            Prize <span className="text-orange-500">Pool</span>
           </h2>
-          <p className="text-zinc-500 font-mono text-xs tracking-[0.4em] uppercase">
+          <p className="text-zinc-500 mt-4 text-lg max-w-2xl mx-auto ">
             Recognizing the Elite Algorithmic Minds
           </p>
           <div className="h-1 w-24 bg-orange-600 mx-auto mt-4 rounded-full opacity-50" />
