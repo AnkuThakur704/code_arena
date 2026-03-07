@@ -30,6 +30,13 @@ const Countdown = () => {
 
   return (
     <section className="py-12 flex flex-col items-center justify-center bg-transparent">
+      <div className="mb-10 flex items-center gap-2">
+        <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+        <span className="text-[10px] font-mono text-orange-500/80 uppercase tracking-widest">
+          System Online // Initializing Competition Sequence
+        </span>
+      </div>
+
       <div className="flex gap-4 md:gap-8">
         {/* DAYS */}
         <div className="flex flex-col items-center wave-card-1">
@@ -52,12 +59,7 @@ const Countdown = () => {
         </div>
       </div>
       
-      <div className="mt-10 flex items-center gap-2">
-        <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-        <span className="text-[10px] font-mono text-orange-500/80 uppercase tracking-widest">
-          System Online // Initializing Competition Sequence
-        </span>
-      </div>
+      
 
       <style jsx>{`
         /* The specific wave animation classes */

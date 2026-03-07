@@ -21,10 +21,10 @@ export default function QueryForm() {
         {/* Heading */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white">
-            Send a Query
+            Send <span className="text-orange-500">Query</span>
           </h2>
 
-          <p className="text-cyan-400/80 mt-3 text-sm sm:text-base">
+          <p className="text-zinc-500 mt-4 text-lg max-w-2xl mx-auto ">
             Have a question about Code Arena? Reach out and we’ll help you. 
           </p>
 
@@ -118,7 +118,7 @@ export default function QueryForm() {
             {/* Button */}
             <button
               type="submit"
-              className="w-full sm:w-auto sm:px-10 py-3 rounded-lg bg-cyan-500 text-black font-semibold tracking-wide hover:bg-cyan-400 transition"
+              className="w-full sm:w-auto sm:px-10 py-3 rounded-lg bg-orange-500 text-black font-semibold tracking-wide hover:bg-orange-500 transition"
             >
               Send Message
             </button>

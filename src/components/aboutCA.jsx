@@ -36,7 +36,7 @@ export default function AboutCompetition() {
               {/* Left Text (Paragraph) */}
               <div className="space-y-6 text-zinc-300 leading-relaxed text-lg">
                 <p>
-                  <span className="text-cyan-400 font-semibold">Code Arena</span> is a 
+                  <span className="text-white font-bold">Code Arena</span> is a 
                   competitive programming challenge designed to test your ability 
                   to think logically, solve complex problems, and implement efficient 
                   algorithms under time pressure.

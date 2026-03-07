@@ -42,9 +42,9 @@ export default function Timeline() {
 
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-black text-white">
-            Competition Timeline
+            Competition <span className="text-orange-500">Timeline</span>
           </h2>
-          <p className="text-cyan-400/80 mt-4">
+          <p className="text-zinc-500 mt-4 text-lg max-w-2xl mx-auto ">
             Follow the flow of the arena as the competition unfolds.
           </p>
         </div>
@@ -57,7 +57,7 @@ export default function Timeline() {
           {/* animated progress */}
           <motion.div
             style={{ scaleY }}
-            className="absolute left-4 top-0 w-[2px] h-full bg-cyan-400 origin-top"
+            className="absolute left-4 top-0 w-[2px] h-full bg-orange-500 origin-top"
           />
 
           <div className="space-y-20">
@@ -72,7 +72,7 @@ export default function Timeline() {
                 className="relative pl-14"
               >
                 {/* node */}
-                <div className="absolute left-2 top-2 h-5 w-5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
+                <div className="absolute left-2 top-2 h-5 w-5 rounded-full bg-orange-500 shadow-[0_0_10px_#22d3ee]" />
 
                 <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-6">
                   <h3 className="text-white text-lg font-semibold">
@@ -83,7 +83,7 @@ export default function Timeline() {
                     {step.desc}
                   </p>
 
-                  <span className="text-cyan-400 text-xs mt-3 block">
+                  <span className="text-orange-400 text-xs mt-3 block">
                     {step.time}
                   </span>
                 </div>
