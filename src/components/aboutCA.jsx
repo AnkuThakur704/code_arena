@@ -1,23 +1,31 @@
 export default function AboutCompetition() {
   return (
-    <section className="relative w-full py-24 px-6 md:px-16">
-      
+    <section className="relative w-full py-24 px-6 md:px-16 overflow-hidden">
+
       <div className="max-w-6xl mx-auto">
 
         {/* Section Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 relative">
           <h2 className="text-4xl md:text-5xl font-black tracking-tight text-white">
             About The Arena
           </h2>
+
           <p className="text-cyan-400/80 mt-4 text-lg max-w-2xl mx-auto">
             A battlefield for logic, speed, and precision. Only the sharpest minds rise to the top.
           </p>
+
+          <div className="h-[2px] w-24 bg-cyan-500 mx-auto mt-6 opacity-40"></div>
         </div>
 
         {/* Content Card */}
-        <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-8 md:p-12">
+        <div className="relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-8 md:p-12 overflow-hidden">
 
-          <div className="grid md:grid-cols-2 gap-10">
+          {/* Decorative background text */}
+          <div className="absolute -top-10 -right-5 text-[16rem] font-black opacity-[0.03] select-none pointer-events-none">
+            CA
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 relative z-10">
 
             {/* Left Text */}
             <div className="space-y-6 text-zinc-300 leading-relaxed text-lg">
@@ -42,7 +50,7 @@ export default function AboutCompetition() {
               </p>
             </div>
 
-            {/* Right Feature List */}
+            {/* Feature Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
               <FeatureCard
@@ -79,10 +87,25 @@ export default function AboutCompetition() {
 
 function FeatureCard({ icon, title, desc }) {
   return (
-    <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-cyan-400/40 transition">
-      <div className="text-2xl mb-3">{icon}</div>
-      <h3 className="text-white font-semibold mb-2">{title}</h3>
-      <p className="text-sm text-zinc-400 leading-relaxed">{desc}</p>
+    <div className="group relative bg-white/5 border border-white/10 rounded-xl p-6 transition-all duration-500 hover:scale-[1.03] hover:border-cyan-400/40 backdrop-blur-md overflow-hidden">
+
+      {/* background glow */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-cyan-500/10 to-transparent"></div>
+
+      {/* floating icon */}
+      <div className="absolute right-4 top-4 text-4xl opacity-20 group-hover:opacity-40 transition-transform duration-500 group-hover:-translate-y-1">
+        {icon}
+      </div>
+
+      {/* content */}
+      <div className="relative z-10">
+        <h3 className="text-white font-semibold mb-2">{title}</h3>
+        <p className="text-sm text-zinc-400 leading-relaxed">{desc}</p>
+      </div>
+
+      {/* decorative corner bracket */}
+      <div className="absolute bottom-2 right-2 w-4 h-4 border-r border-b border-white/20"></div>
+
     </div>
   );
 }
