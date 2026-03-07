@@ -12,7 +12,7 @@ const CodeArena = () => {
       
       {/* 1. THE PLANET */}
       <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-end">
-        <div className="w-full h-full lg:w-[75%] lg:h-full transform translate-x-10">
+        <div className="md:w-full md:h-full  lg:w-[75%] lg:h-full transform translate-x-10">
           
           <PlanetScene />
         </div>
@@ -61,7 +61,7 @@ const CodeArena = () => {
         </div>
 
         {/* Right Side is now empty because PlanetScene is absolute-positioned above */}
-        <div className="hidden lg:block lg:w-[100%]" />
+        <div className="hidden lg:block lg:w-full" />
       </div>
 
       <style jsx>{`

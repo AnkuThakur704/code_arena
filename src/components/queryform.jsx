@@ -1,12 +1,17 @@
 'use client'
 import { useState } from "react";
 export default function QueryForm() {
-    const [formdata, setformdata] = useState({})
-
+    const [formdata, setformdata] = useState({name:"",email:"",subject:"",message:""
+    })
+    const [sent, setsent] = useState(false)
     const handleSubmit = async(e)=>{
         e.preventDefault()
         //save the query 
         console.log(formdata)
+        setformdata({
+          name:"",email:"",subject:"",message:""
+        })
+        setsent(true)
     }
 
   return (
@@ -35,6 +40,11 @@ export default function QueryForm() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+            {sent && (
+  <div className="mb-6 border border-cyan-400/30 bg-cyan-500/10 backdrop-blur-md rounded-lg px-5 py-4 text-cyan-300 text-sm sm:text-base shadow-[0_0_12px_rgba(34,211,238,0.25)] transition-all duration-500">
+    Your query has been sent successfully. We will get back to you soon.
+  </div>
+)}
 
             {/* Name + Email */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -44,8 +54,10 @@ export default function QueryForm() {
                   Name
                 </label>
                 <input
+                required
                 name="name"
-                onChange={(e)=>setformdata({...formdata,Name:e.target.value})}
+                value={formdata.name}
+                onChange={(e)=>setformdata({...formdata,[e.target.name]:e.target.value})}
                   type="text"
                   autoComplete="off"
                   placeholder="Enter your name"
@@ -58,8 +70,10 @@ export default function QueryForm() {
                   Email
                 </label>
                 <input
+                required
                 name="email"
-                onChange={(e)=>setformdata({...formdata,Email:e.target.value})}
+                value={formdata.email}
+                onChange={(e)=>setformdata({...formdata,[e.target.name]:e.target.value})}
                   type="email"
                   placeholder="Enter your email"
                   className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm sm:text-base focus:outline-none focus:border-cyan-400 transition"
@@ -74,8 +88,10 @@ export default function QueryForm() {
                 Subject
               </label>
               <input
+              required
               name="subject"
-                onChange={(e)=>setformdata({...formdata,Subject:e.target.value})}
+              value={formdata.subject}
+                onChange={(e)=>setformdata({...formdata,[e.target.name]:e.target.value})}
                 autoComplete="off"
                 type="text"
                 placeholder="Subject"
@@ -90,7 +106,9 @@ export default function QueryForm() {
               </label>
               <textarea
               name="message"
-                onChange={(e)=>setformdata({...formdata,Message:e.target.value})}
+              value={formdata.message}
+              required
+                onChange={(e)=>setformdata({...formdata,[e.target.name]:e.target.value})}
                 rows="5"
                 placeholder="Write your message..."
                 className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm sm:text-base focus:outline-none focus:border-cyan-400 transition resize-none"
