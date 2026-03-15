@@ -42,24 +42,24 @@ export default function Sponsors() {
         {/* Marquee Container */}
         <div className="relative">
           <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-            <motion.div 
+            <motion.div
               animate={{ x: [0, -100 * sponsorlogos.length] }}
-              transition={{ 
-                duration: 30, 
-                repeat: Infinity, 
-                ease: "linear" 
+              transition={{
+                duration: 30,
+                repeat: Infinity,
+                ease: "linear"
               }}
               className="flex gap-12 py-10"
             >
               {marqueeLogos.map((logo, idx) => (
-                <div 
-                  key={idx} 
+                <div
+                  key={idx}
                   className="flex-shrink-0 flex items-center justify-center p-8 w-64 h-32 bg-white/[0.03] border border-white/5 rounded-2xl backdrop-blur-xl group hover:border-orange-500/40 transition-colors duration-500 relative"
                 >
-                  <img 
-                    src={logo.icon} 
-                    alt={logo.name} 
-                    className="h-10 object-contain brightness-0 invert opacity-40 group-hover:opacity-100 transition-opacity duration-500" 
+                  <img
+                    src={logo.icon}
+                    alt={logo.name}
+                    className="h-10 object-contain brightness-0 invert opacity-40 group-hover:opacity-100 transition-opacity duration-500"
                   />
                   {/* Hover Decoration */}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />

@@ -11,7 +11,7 @@ function InputField({ label, icon, name, value, onChange, focused, setFocused })
         <div className={`absolute left-4 transition-colors duration-300 ${focused ? 'text-orange-500' : 'text-zinc-600'}`}>
           {icon}
         </div>
-        <input 
+        <input
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
@@ -27,22 +27,22 @@ function InputField({ label, icon, name, value, onChange, focused, setFocused })
 }
 
 export default function QueryForm() {
-    const [formdata, setformdata] = useState({name:"",email:"",subject:"",message:""})
-    const [sent, setsent] = useState(false)
-    const [focused, setFocused] = useState("")
+  const [formdata, setformdata] = useState({ name: "", email: "", subject: "", message: "" })
+  const [sent, setsent] = useState(false)
+  const [focused, setFocused] = useState("")
 
-    const handleSubmit = async(e)=>{
-        e.preventDefault()
-        setsent(true)
-        setTimeout(() => setsent(false), 5000)
-        setformdata({name:"",email:"",subject:"",message:""})
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setsent(true)
+    setTimeout(() => setsent(false), 5000)
+    setformdata({ name: "", email: "", subject: "", message: "" })
+  }
 
   return (
     <section className="relative w-full py-32 px-6 overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-600/5 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2" />
-      
+
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Heading */}
         <div className="text-center mb-20">
@@ -62,10 +62,10 @@ export default function QueryForm() {
 
         {/* Form Layout */}
         <div className="grid lg:grid-cols-5 gap-12 items-start">
-          
+
           {/* Left: Contact Info / FAQ hint */}
           <div className="lg:col-span-2 space-y-10">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -74,15 +74,15 @@ export default function QueryForm() {
               <h3 className="text-white text-2xl font-bold italic">Why reach out?</h3>
               <ul className="space-y-4">
                 <li className="flex gap-4 text-zinc-400 group">
-                  <div className="w-6 h-6 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0 group-hover:scale-125 transition-transform"><HelpCircle size={14}/></div>
+                  <div className="w-6 h-6 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0 group-hover:scale-125 transition-transform"><HelpCircle size={14} /></div>
                   <span className="text-sm">Technical challenges during registration</span>
                 </li>
                 <li className="flex gap-4 text-zinc-400 group">
-                  <div className="w-6 h-6 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-500 shrink-0 group-hover:scale-125 transition-transform"><HelpCircle size={14}/></div>
+                  <div className="w-6 h-6 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-500 shrink-0 group-hover:scale-125 transition-transform"><HelpCircle size={14} /></div>
                   <span className="text-sm">Inquiries about prize distribution logic</span>
                 </li>
                 <li className="flex gap-4 text-zinc-400 group">
-                  <div className="w-6 h-6 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500 shrink-0 group-hover:scale-125 transition-transform"><HelpCircle size={14}/></div>
+                  <div className="w-6 h-6 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500 shrink-0 group-hover:scale-125 transition-transform"><HelpCircle size={14} /></div>
                   <span className="text-sm">Corporate sponsorship for future events</span>
                 </li>
               </ul>
@@ -95,7 +95,7 @@ export default function QueryForm() {
           </div>
 
           {/* Right: The actual form */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -103,7 +103,7 @@ export default function QueryForm() {
           >
             {/* Success Notification */}
             {sent && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="absolute top-4 left-1/2 -translate-x-1/2 bg-orange-500 text-white px-6 py-2 rounded-full font-bold text-sm z-50 shadow-xl"
@@ -114,34 +114,34 @@ export default function QueryForm() {
 
             <form onSubmit={handleSubmit} className="space-y-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <InputField 
-                   label="Your Name" 
-                   icon={<User size={16}/>} 
-                   name="name"
-                   value={formdata.name}
-                   onChange={(v) => setformdata({...formdata, name: v})}
-                   focused={focused === "name"}
-                   setFocused={setFocused}
+                <InputField
+                  label="Your Name"
+                  icon={<User size={16} />}
+                  name="name"
+                  value={formdata.name}
+                  onChange={(v) => setformdata({ ...formdata, name: v })}
+                  focused={focused === "name"}
+                  setFocused={setFocused}
                 />
-                <InputField 
-                   label="Email System" 
-                   icon={<Mail size={16}/>} 
-                   name="email"
-                   value={formdata.email}
-                   onChange={(v) => setformdata({...formdata, email: v})}
-                   focused={focused === "email"}
-                   setFocused={setFocused}
+                <InputField
+                  label="Email System"
+                  icon={<Mail size={16} />}
+                  name="email"
+                  value={formdata.email}
+                  onChange={(v) => setformdata({ ...formdata, email: v })}
+                  focused={focused === "email"}
+                  setFocused={setFocused}
                 />
               </div>
 
-              <InputField 
-                 label="Protocol / Subject" 
-                 icon={<MessageSquare size={16}/>} 
-                 name="subject"
-                 value={formdata.subject}
-                 onChange={(v) => setformdata({...formdata, subject: v})}
-                 focused={focused === "subject"}
-                 setFocused={setFocused}
+              <InputField
+                label="Protocol / Subject"
+                icon={<MessageSquare size={16} />}
+                name="subject"
+                value={formdata.subject}
+                onChange={(v) => setformdata({ ...formdata, subject: v })}
+                focused={focused === "subject"}
+                setFocused={setFocused}
               />
 
               <div className="space-y-4">
@@ -150,7 +150,7 @@ export default function QueryForm() {
                   <textarea
                     rows="4"
                     value={formdata.message}
-                    onChange={(e) => setformdata({...formdata, message: e.target.value})}
+                    onChange={(e) => setformdata({ ...formdata, message: e.target.value })}
                     onFocus={() => setFocused("message")}
                     onBlur={() => setFocused("")}
                     placeholder="Enter details..."
@@ -165,7 +165,7 @@ export default function QueryForm() {
                 type="submit"
                 className="w-full py-5 bg-orange-500 hover:bg-orange-400 text-black font-black uppercase tracking-widest rounded-2xl shadow-[0_10px_30px_rgba(249,115,22,0.3)] transition-all flex items-center justify-center gap-3"
               >
-                Transmit Query <Send size={18}/>
+                Transmit Query <Send size={18} />
               </motion.button>
             </form>
           </motion.div>
@@ -173,4 +173,4 @@ export default function QueryForm() {
       </div>
     </section>
   );
-}
+}

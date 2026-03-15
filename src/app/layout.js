@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="dark">
       <body className={`${sansita.className} antialiased selection:bg-orange-500/30 transition-colors duration-500`}>
         <div className="grain-overlay" />
-        <div className="fixed top-0 left-0 w-full h-full z-[-1] opacity-40">
+        <div className="fixed top-0 left-0 w-full h-full z-[-1]">
           <CanvasAnimation />
         </div>
         <Navbar />

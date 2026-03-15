@@ -12,16 +12,16 @@ const CodeArena = () => {
     offset: ["start start", "end start"],
   });
 
-  const yPlanet = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const yPlanet = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]); 
   const opacityContent = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-  const scalePlanet = useTransform(scrollYProgress, [0, 1], [0.8, 1.5]); // Start smaller to give room for zoom
+  const scalePlanet = useTransform(scrollYProgress, [0, 1], [1.2, 2.0]); 
   const rotatePlanet = useTransform(scrollYProgress, [0, 1], [0, 45]);
 
   return (
     <div ref={containerRef} className="relative min-h-[120dvh] w-full"> {/* Increased height for better scroll feel */}
-      
+
       {/* 1. THE PLANET - No overflow on parent means no clipping */}
-      <motion.div 
+      <motion.div
         style={{ y: yPlanet, scale: scalePlanet, rotate: rotatePlanet }}
         className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center lg:justify-end overflow-visible"
       >
@@ -31,15 +31,15 @@ const CodeArena = () => {
       </motion.div>
 
       {/* 2. THE CONTENT - Orbital entry feel */}
-      <motion.div 
+      <motion.div
         style={{ opacity: opacityContent }}
         className="relative z-10 flex flex-col justify-center min-h-[100dvh] px-6 md:px-12 lg:pl-24 py-20"
       >
-        
+
         {/* Left Content Section */}
         <div className="w-full lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left">
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -50,7 +50,7 @@ const CodeArena = () => {
             </h1>
           </motion.div>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -59,7 +59,7 @@ const CodeArena = () => {
             The <span className="text-white font-medium underline decoration-orange-500/50 underline-offset-4">Ultimate</span> Competitive Programming Battle for the next generation of engineers.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
@@ -70,7 +70,7 @@ const CodeArena = () => {
             <FeatureLine icon={<Trophy size={18} className="text-purple-400" />} text="Certificates and recognition" />
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -82,7 +82,7 @@ const CodeArena = () => {
             <StatCard label="Access" value="Global" icon={<Users size={16} />} />
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}

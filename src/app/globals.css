@@ -63,6 +63,7 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    /* background: #020205; */
   }
 }
 
@@ -104,4 +105,4 @@
 
 .drop-shadow-glow {
   filter: drop-shadow(0 0 12px rgba(249, 115, 22, 0.4));
-}
+}
