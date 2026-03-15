@@ -21,241 +21,121 @@ const sansita = Sansita({
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showHackAd, setShowHackAd] = useState(false);
-  const [glitchEffect, setGlitchEffect] = useState(false);
-
-  const targetDate = new Date("2025-03-21T00:00:00").getTime();
-  const [countdown, setCountdown] = useState({
-    days: "00",
-    hours: "00",
-    minutes: "00",
-    seconds: "00",
-  });
-
-  function calculateTimeLeft() {
-    const difference = targetDate - new Date().getTime();
-    return {
-      days: formatTime(Math.floor(difference / (1000 * 60 * 60 * 24))),
-      hours: formatTime(Math.floor((difference / (1000 * 60 * 60)) % 24)),
-      minutes: formatTime(Math.floor((difference / 1000 / 60) % 60)),
-      seconds: formatTime(Math.floor((difference / 1000) % 60)),
-    };
-  }
-
-  function formatTime(time) {
-    return time < 10 ? `0${time}` : `${time}`;
-  }
-
-
-  // Trigger glitch effect every few seconds
-  useEffect(() => {
-    const glitchInterval = setInterval(() => {
-      setGlitchEffect(true);
-      setTimeout(() => setGlitchEffect(false), 200);
-    }, 5000);
-
-    return () => clearInterval(glitchInterval);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
-      const hackText = document.getElementById("landing");
-      if (hackText) {
-        const hackheight = hackText.offsetHeight;
-        setShowHackAd(window.scrollY > hackheight * 0.5);
-      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const NavLinks = ({ className, onClick }) => (
+    <div className={className}>
+      {[
+        { name: "Arena", href: "/CodeArena" },
+        { name: "Team", href: "/team" },
+        { name: "Gallery", href: "/gallery" },
+        { name: "Alumni", href: "/alumni" },
+      ].map((link) => (
+        <Link
+          key={link.name}
+          href={link.href}
+          onClick={onClick}
+          className="text-zinc-400 hover:text-white transition-colors font-medium tracking-wide relative group"
+        >
+          {link.name}
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full" />
+        </Link>
+      ))}
+    </div>
+  );
+
   return (
     <>
       {/* Main Navbar with adjusted position */}
       <motion.nav
-        className={`fixed w-full z-40 transition-all duration-300 text-white/90 ${
+        className={`fixed w-full z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-black/50 backdrop-blur-md shadow-lg"
-            : "bg-transparent "
+            ? "bg-black/80 backdrop-blur-xl border-b border-white/10 shadow-2xl py-2"
+            : "bg-transparent py-4"
         }`}
       >
-        <div
-          className={`container  mx-auto flex justify-between items-center p-4`}
-        >
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className={`fixed top-0 left-0 w-full z-50 hidden md:block duration-300 text-white/90 ${
-              scrolled
-                ? "bg-black/50 backdrop-blur-md shadow-lg"
-                : "bg-transparent"
-            }
-             style={{ width:}}
-              {/* Content */}`}
-          >
-            <div className="flex items-center justify-center">
-              {" "}
-              {/* Content */}
-              <div className="container min-w-full mx-auto px-4 py-3 relative z-10 ">
-                <div className="flex flex-col md:flex-row items-center space-y-4 md:justify-evenly">
-                  {/* CSEC and Hack Logo */}
-                  <div className="flex items-center space-x-3 mb-2 md:mb-0 md:w-full">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                          key="logos"
-                          className="flex items-center"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                        >
-                          {/* CSEC Logo - Link to external site */}
-                          <motion.a
-                            href="/"
-                            className="relative w-[64px] h-[64px] mr-3"
-                            whileHover={{}}
-                            transition={{ duration: 2, ease: "easeInOut" }}
-                          >
-                            <Image
-                              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/csec-RitzmBrgdmOMfzaijUqHFSmOVA4LzO.png"
-                              alt="CSEC Logo"
-                              fill
-                              className="object-contain"
-                            />
-                          </motion.a>
-                        </motion.div>
-                    </AnimatePresence>
-                  </div>
-                  {/* Nav Links*/}
-                  <div className="container items-center ">
-                    <div className="hidden md:flex space-x-12 md:w-full md:justify-end">
-                      <Link
-                        href="/gallery"
-                        className="hover:text-gray-400 md:text-2xl text-xl"
-                      >
-                        Gallery
-                      </Link>
-                      <Link
-                        href="/team"
-                        className="hover:text-gray-400 md:text-2xl text-xl"
-                      >
-                        Team
-                      </Link>
-                      <Link
-                        href="/alumni"
-                        className="hover:text-gray-400 md:text-2xl text-xl"
-                      >
-                        Alumni
-                      </Link>
-                       <Link
-                        href="/CodeArena"
-                        className="hover:text-gray-400 md:text-2xl text-xl"
-                      >
-                        CodeArena'26
-                      </Link>
-                    </div>
-                    <div className="md:hidden">
-                      <button
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        className="focus:outline-none"
-                      >
-                        <svg
-                          className="w-6 h-6"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M4 6h16M4 12h16m-7 6h7"
-                          ></path>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-          <AnimatePresence mode="wait">
-              <motion.div
-                key="logos"
-                className="flex items-center md:hidden"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                {/* CSEC Logo - Link to external site */}
-                <motion.a
-                  href="/"
-                  className="relative w-[48px] h-[48px] mr-3"
-                  whileHover={{}}
-                  transition={{ duration: 2, ease: "easeInOut" }}
-                >
-                  <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/csec-RitzmBrgdmOMfzaijUqHFSmOVA4LzO.png"
-                    alt="CSEC Logo"
-                    fill
-                    className="object-contain"
-                  />
-                </motion.a>
-              </motion.div>
-          </AnimatePresence>
-          <div className="md:hidden">
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="focus:outline-none"
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          {/* Logo Section */}
+          <Link href="/" className="flex items-center gap-3 group relative z-50">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative w-12 h-12 md:w-16 md:h-16"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16m-7 6h7"
-                ></path>
-              </svg>
-            </button>
+              <Image
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/csec-RitzmBrgdmOMfzaijUqHFSmOVA4LzO.png"
+                alt="CSEC Logo"
+                fill
+                className="object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+              />
+            </motion.div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-10">
+            <NavLinks className="flex items-center gap-8" />
+            <Link
+              href="/CodeArena"
+              className="px-6 py-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold rounded-lg hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all hover:-translate-y-0.5"
+            >
+              CodeArena'26
+            </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden relative z-50 p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+            aria-label="Toggle Menu"
+          >
+            <div className="w-6 h-5 relative flex flex-col justify-between">
+              <motion.span
+                animate={menuOpen ? { rotate: 45, y: 9 } : { rotate: 0, y: 0 }}
+                className="w-full h-0.5 bg-white rounded-full origin-left transition-all"
+              />
+              <motion.span
+                animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
+                className="w-full h-0.5 bg-white rounded-full transition-all"
+              />
+              <motion.span
+                animate={menuOpen ? { rotate: -45, y: -9 } : { rotate: 0, y: 0 }}
+                className="w-full h-0.5 bg-white rounded-full origin-left transition-all"
+              />
+            </div>
+          </button>
         </div>
 
-        {menuOpen && (
-          <div className="md:hidden bg-black/50 backdrop-blur-md shadow-lg">
-            <div className="flex flex-col space-y-4 p-4">
-              <Link
-                href="/gallery"
-                className="hover:text-gray-400"
+        {/* Mobile Navigation Overlay */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, x: "100%" }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-8"
+            >
+              <NavLinks
+                className="flex flex-col items-center gap-8 text-2xl"
                 onClick={() => setMenuOpen(false)}
-              >
-                Gallery
-              </Link>
+              />
               <Link
-                href="/team"
-                className="hover:text-gray-400"
+                href="/CodeArena"
                 onClick={() => setMenuOpen(false)}
+                className="px-10 py-4 bg-orange-600 text-white font-black rounded-xl text-xl animate-pulse"
               >
-                Team
+                CodeArena'26
               </Link>
-              <Link
-                href="/alumni"
-                className="hover:text-gray-400"
-                onClick={() => setMenuOpen(false)}
-              >
-                Alumni
-              </Link>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
 
       {/* Add keyframes for animations */}

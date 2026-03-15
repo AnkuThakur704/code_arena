@@ -68,22 +68,27 @@ export default function Timeline() {
             initial={{ y: -20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter mb-4">
+            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-4">
               CONTEST <span className="text-orange-500">TIMELINE</span>
             </h2>
-            <p className="text-zinc-400 mt-4 text-lg md:text-xl font-light tracking-wide max-w-2xl mx-auto">
-              Follow the progression of the ultimate competitive programming battle.
+            <p className="text-zinc-500 mt-4 text-lg md:text-xl font-light tracking-wide max-w-2xl mx-auto">
+              Follow the progression of the ultimate competitive programming battle and mark your calendars.
             </p>
           </motion.div>
         </div>
 
-        <div className="relative pt-10 pb-20">
-          {/* Default Path Background line - very subtle */}
-          <div className="absolute left-[calc(2rem-1px)] md:left-1/2 top-4 bottom-4 w-[2px] bg-white/5 z-0" />
+        <div className="relative pt-10 pb-20 px-4 md:px-0">
+          {/* Animated Progress Line */}
+          <div className="absolute left-[calc(2rem-1px)] md:left-1/2 top-4 bottom-4 w-[2px] bg-white/5 z-0">
+            <motion.div 
+              style={{ scaleY: scrollYProgress }}
+              className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-500 to-cyan-500 origin-top shadow-[0_0_15px_rgba(249,115,22,0.5)]"
+            />
+          </div>
 
-          <div className="space-y-16 md:space-y-32 relative">
+          <div className="space-y-24 md:space-y-40 relative">
 
             {steps.map((step, i) => (
               <motion.div
@@ -124,8 +129,12 @@ export default function Timeline() {
                     </motion.div>
                   )}
 
-                  <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${activeIndex === i ? 'bg-orange-500 border-orange-400' : 'bg-zinc-900 border-zinc-700'} border-2 shadow-[0_0_10px_rgba(0,0,0,0.5)] flex items-center justify-center relative transition-colors duration-300`}>
-                    <div className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${activeIndex === i ? 'bg-white' : 'bg-zinc-500'} transition-colors duration-300`} />
+                  <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full border-2 z-20 flex items-center justify-center transition-all duration-500 ${
+                    activeIndex === i 
+                      ? 'bg-orange-500 border-white scale-110 shadow-[0_0_20px_rgba(249,115,22,0.6)]' 
+                      : 'bg-zinc-900 border-zinc-800 scale-100'
+                  }`}>
+                    <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full ${activeIndex === i ? 'bg-white' : 'bg-zinc-700'} transition-colors duration-500`} />
                   </div>
                 </div>
 

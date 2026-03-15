@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { motion } from "framer-motion";
 
 const Countdown = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -29,110 +30,74 @@ const Countdown = () => {
   }, [targetDate]);
 
   return (
-    <section className="py-12 flex flex-col items-center justify-center bg-transparent">
-      <div className="mb-10 flex items-center gap-2">
-        <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-        <span className="text-[10px] font-mono text-orange-500/80 uppercase tracking-widest">
-          System Online // Initializing Competition Sequence
-        </span>
+    <section className="py-24 flex flex-col items-center justify-center bg-transparent relative overflow-hidden">
+      {/* Background Hub Decoration */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+      
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-16 flex flex-col items-center gap-4 relative z-10"
+      >
+        <div className="flex items-center gap-2 px-4 py-1.5 bg-orange-500/10 border border-orange-500/20 rounded-full">
+          <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+          <span className="text-[10px] font-mono text-orange-500 uppercase tracking-[0.3em] font-bold">
+            Temporal Synchronization Active
+          </span>
+        </div>
+        <h2 className="text-white/40 text-xs font-black uppercase tracking-[0.5em] ml-[0.5em]">Countdown to Ignition</h2>
+      </motion.div>
+
+      <div className="flex flex-wrap justify-center gap-4 md:gap-10 relative z-10 px-6">
+        <TimeUnit value={timeLeft.days} label="Days" />
+        <TimeSeparator />
+        <TimeUnit value={timeLeft.hours} label="Hours" />
+        <TimeSeparator className="hidden md:block" />
+        <TimeUnit value={timeLeft.minutes} label="Minutes" />
+        <TimeSeparator />
+        <TimeUnit value={timeLeft.seconds} label="Seconds" />
       </div>
 
-      <div className="flex gap-4 md:gap-8">
-        {/* DAYS */}
-        <div className="flex flex-col items-center wave-card-1">
-          <Card value={timeLeft.days} label="Days" />
-        </div>
-        
-        {/* HOURS */}
-        <div className="flex flex-col items-center wave-card-2">
-          <Card value={timeLeft.hours} label="Hours" />
-        </div>
-
-        {/* MINUTES */}
-        <div className="flex flex-col items-center wave-card-3">
-          <Card value={timeLeft.minutes} label="Mins" />
-        </div>
-
-        {/* SECONDS */}
-        <div className="flex flex-col items-center wave-card-4">
-          <Card value={timeLeft.seconds} label="Secs" />
-        </div>
+      {/* Decorative Technical data lines */}
+      <div className="mt-16 w-full max-w-sm h-px bg-gradient-to-r from-transparent via-white/10 to-transparent relative">
+        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-2 h-2 bg-orange-500/40 rounded-full blur-sm" />
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-2 h-2 bg-orange-500/40 rounded-full blur-sm" />
       </div>
-      
-      
-
-      <style jsx>{`
-        /* The specific wave animation classes */
-        /* Each card gets a unique speed and a unique delay */
-        .wave-card-1 { 
-          animation: float-random 5.7s ease-in-out infinite; 
-          animation-delay: 0.2s; 
-        }
-        .wave-card-2 { 
-          animation: float-random 6.3s ease-in-out infinite; 
-          animation-delay: -1.5s; /* Negative delay starts the animation mid-way */
-        }
-        .wave-card-3 { 
-          animation: float-random 5.9s ease-in-out infinite; 
-          animation-delay: 0.8s; 
-        }
-        .wave-card-4 { 
-          animation: float-random 6.1s ease-in-out infinite; 
-          animation-delay: -3.2s; 
-        }
-
-        @keyframes float-random {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-7px); } /* Slightly higher float for more impact */
-        }
-
-        .prize-card {
-          box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .prize-card::before {
-          content: '';
-          position: absolute;
-          top: 0; left: -100%;
-          width: 50%;
-          height: 100%;
-          background: linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.05) 50%,
-            rgba(255, 255, 255, 0) 100%
-          );
-          transform: skewX(-25deg);
-          transition: 0.5s;
-        }
-
-        .prize-card:hover::before {
-          left: 150%;
-        }
-      `}</style>
     </section>
   );
 };
 
-// Internal Card UI helper to keep code clean
-const Card = ({ value, label }) => (
-  <>
+const TimeUnit = ({ value, label }) => (
+  <div className="flex flex-col items-center gap-4">
     <div className="relative group">
-      <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-orange-400 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-      <div className="relative w-20 h-24 md:w-32 md:h-40 bg-black/40 border border-white/10 backdrop-blur-xl rounded-xl flex items-center justify-center prize-card">
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-orange-500/50 rounded-tr-lg" />
-        <span className="text-4xl md:text-7xl font-black text-white tracking-tighter tabular-nums">
+      {/* Glow effect */}
+      <div className="absolute -inset-4 bg-orange-500/5 rounded-3xl blur-2xl group-hover:bg-orange-500/10 transition-all duration-700" />
+      
+      <div className="relative w-24 h-28 md:w-40 md:h-48 bg-white/[0.02] border border-white/5 backdrop-blur-3xl rounded-3xl flex items-center justify-center overflow-hidden">
+        {/* Subtle Scanline */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none" />
+        
+        {/* Content */}
+        <span className="text-5xl md:text-8xl font-black text-white tracking-tighter tabular-nums drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
           {String(value).padStart(2, '0')}
         </span>
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none"></div>
+
+        {/* Technical Corner */}
+        <div className="absolute bottom-3 right-3 w-4 h-4 border-r-2 border-b-2 border-white/10" />
       </div>
     </div>
-    <span className="mt-4 text-[10px] md:text-xs font-mono uppercase tracking-[0.3em] text-zinc-500 font-bold">
+    <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.4em] text-zinc-500 font-black ml-[0.4em]">
       {label}
     </span>
-  </>
+  </div>
 );
 
-export default Countdown;
+const TimeSeparator = ({ className = "" }) => (
+  <div className={`hidden sm:flex flex-col justify-center gap-3 pt-4 md:pt-12 ${className}`}>
+    <div className="w-1.5 h-1.5 rounded-full bg-orange-500/40" />
+    <div className="w-1.5 h-1.5 rounded-full bg-orange-500/40" />
+  </div>
+);
+
+export default Countdown;

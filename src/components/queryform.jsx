@@ -1,136 +1,176 @@
-'use client'
+'use client';
+import { motion } from "framer-motion";
+import { Send, User, Mail, MessageSquare, HelpCircle } from "lucide-react";
 import { useState } from "react";
+
+function InputField({ label, icon, name, value, onChange, focused, setFocused }) {
+  return (
+    <div className="space-y-4">
+      <label className="text-[10px] uppercase font-black tracking-widest text-zinc-500 ml-2">{label}</label>
+      <div className={`relative flex items-center group transition-all duration-500 ${focused ? 'ring-2 ring-orange-500/30' : ''}`}>
+        <div className={`absolute left-4 transition-colors duration-300 ${focused ? 'text-orange-500' : 'text-zinc-600'}`}>
+          {icon}
+        </div>
+        <input 
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => setFocused(name)}
+          onBlur={() => setFocused("")}
+          autoComplete="off"
+          className="w-full bg-white/5 border border-white/5 rounded-2xl pl-12 pr-6 py-4 text-white placeholder:text-zinc-700 focus:outline-none transition-all"
+          placeholder="Type here..."
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function QueryForm() {
-    const [formdata, setformdata] = useState({name:"",email:"",subject:"",message:""
-    })
+    const [formdata, setformdata] = useState({name:"",email:"",subject:"",message:""})
     const [sent, setsent] = useState(false)
+    const [focused, setFocused] = useState("")
+
     const handleSubmit = async(e)=>{
         e.preventDefault()
-        //save the query 
-        console.log(formdata)
-        setformdata({
-          name:"",email:"",subject:"",message:""
-        })
         setsent(true)
+        setTimeout(() => setsent(false), 5000)
+        setformdata({name:"",email:"",subject:"",message:""})
     }
 
   return (
-    <section className="relative w-full py-20 px-5 sm:px-8 md:px-16">
-      <div className="max-w-3xl mx-auto">
-
+    <section className="relative w-full py-32 px-6 overflow-hidden">
+      {/* Decorative Elements */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-600/5 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2" />
+      
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* Heading */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white">
-            Send <span className="text-orange-500">Query</span>
-          </h2>
-
-          <p className="text-zinc-500 mt-4 text-lg max-w-2xl mx-auto ">
-            Have a question about Code Arena? Reach out and we’ll help you. 
-          </p>
-
-          <div className="h-0.5 w-20 bg-cyan-500 mx-auto mt-5 opacity-40"></div>
+        <div className="text-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter">
+              Query <span className="text-orange-500">Form</span>
+            </h2>
+            <p className="text-zinc-500 text-lg md:text-xl max-w-xl mx-auto font-light">
+              Got technical hurdles or procedural doubts? Our core team is on standby to assist your journey.
+            </p>
+          </motion.div>
         </div>
 
-        {/* Form Card */}
-        <div className="relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-6 sm:p-8 md:p-10 overflow-hidden">
+        {/* Form Layout */}
+        <div className="grid lg:grid-cols-5 gap-12 items-start">
+          
+          {/* Left: Contact Info / FAQ hint */}
+          <div className="lg:col-span-2 space-y-10">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <h3 className="text-white text-2xl font-bold italic">Why reach out?</h3>
+              <ul className="space-y-4">
+                <li className="flex gap-4 text-zinc-400 group">
+                  <div className="w-6 h-6 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0 group-hover:scale-125 transition-transform"><HelpCircle size={14}/></div>
+                  <span className="text-sm">Technical challenges during registration</span>
+                </li>
+                <li className="flex gap-4 text-zinc-400 group">
+                  <div className="w-6 h-6 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-500 shrink-0 group-hover:scale-125 transition-transform"><HelpCircle size={14}/></div>
+                  <span className="text-sm">Inquiries about prize distribution logic</span>
+                </li>
+                <li className="flex gap-4 text-zinc-400 group">
+                  <div className="w-6 h-6 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500 shrink-0 group-hover:scale-125 transition-transform"><HelpCircle size={14}/></div>
+                  <span className="text-sm">Corporate sponsorship for future events</span>
+                </li>
+              </ul>
+            </motion.div>
 
-          {/* Background decoration */}
-          <div className="absolute -top-10 -right-5 text-[10rem] md:text-[12rem] font-black opacity-[0.03] pointer-events-none select-none">
-            ?
+            <div className="p-8 bg-white/[0.02] border border-white/5 rounded-3xl backdrop-blur-xl">
+              <span className="text-[10px] text-zinc-600 font-black uppercase tracking-widest block mb-4">Urgent matters</span>
+              <p className="text-zinc-300 font-medium">arena-support@csec.edu</p>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+          {/* Right: The actual form */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 md:p-12 backdrop-blur-3xl shadow-2xl relative"
+          >
+            {/* Success Notification */}
             {sent && (
-  <div className="mb-6 border border-cyan-400/30 bg-cyan-500/10 backdrop-blur-md rounded-lg px-5 py-4 text-cyan-300 text-sm sm:text-base shadow-[0_0_12px_rgba(34,211,238,0.25)] transition-all duration-500">
-    Your query has been sent successfully. We will get back to you soon.
-  </div>
-)}
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute top-4 left-1/2 -translate-x-1/2 bg-orange-500 text-white px-6 py-2 rounded-full font-bold text-sm z-50 shadow-xl"
+              >
+                Transmission Received!
+              </motion.div>
+            )}
 
-            {/* Name + Email */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-              <div>
-                <label className="block text-xs sm:text-sm text-zinc-400 mb-2 uppercase tracking-wide">
-                  Name
-                </label>
-                <input
-                required
-                name="name"
-                value={formdata.name}
-                onChange={(e)=>setformdata({...formdata,[e.target.name]:e.target.value})}
-                  type="text"
-                  autoComplete="off"
-                  placeholder="Enter your name"
-                  className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm sm:text-base focus:outline-none focus:border-cyan-400 transition"
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <InputField 
+                   label="Your Name" 
+                   icon={<User size={16}/>} 
+                   name="name"
+                   value={formdata.name}
+                   onChange={(v) => setformdata({...formdata, name: v})}
+                   focused={focused === "name"}
+                   setFocused={setFocused}
+                />
+                <InputField 
+                   label="Email System" 
+                   icon={<Mail size={16}/>} 
+                   name="email"
+                   value={formdata.email}
+                   onChange={(v) => setformdata({...formdata, email: v})}
+                   focused={focused === "email"}
+                   setFocused={setFocused}
                 />
               </div>
 
-              <div>
-                <label className="block text-xs sm:text-sm text-zinc-400 mb-2 uppercase tracking-wide">
-                  Email
-                </label>
-                <input
-                required
-                name="email"
-                value={formdata.email}
-                onChange={(e)=>setformdata({...formdata,[e.target.name]:e.target.value})}
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm sm:text-base focus:outline-none focus:border-cyan-400 transition"
-                />
+              <InputField 
+                 label="Protocol / Subject" 
+                 icon={<MessageSquare size={16}/>} 
+                 name="subject"
+                 value={formdata.subject}
+                 onChange={(v) => setformdata({...formdata, subject: v})}
+                 focused={focused === "subject"}
+                 setFocused={setFocused}
+              />
+
+              <div className="space-y-4">
+                <label className="text-[10px] uppercase font-black tracking-widest text-zinc-500 ml-2">Message Payload</label>
+                <div className={`relative transition-all duration-500 ${focused === "message" ? 'ring-2 ring-orange-500/30' : ''}`}>
+                  <textarea
+                    rows="4"
+                    value={formdata.message}
+                    onChange={(e) => setformdata({...formdata, message: e.target.value})}
+                    onFocus={() => setFocused("message")}
+                    onBlur={() => setFocused("")}
+                    placeholder="Enter details..."
+                    className="w-full bg-white/5 border border-white/5 rounded-2xl p-5 text-white placeholder:text-zinc-600 focus:outline-none transition-all resize-none"
+                  />
+                </div>
               </div>
 
-            </div>
-
-            {/* Subject */}
-            <div>
-              <label className="block text-xs sm:text-sm text-zinc-400 mb-2 uppercase tracking-wide">
-                Subject
-              </label>
-              <input
-              required
-              name="subject"
-              value={formdata.subject}
-                onChange={(e)=>setformdata({...formdata,[e.target.name]:e.target.value})}
-                autoComplete="off"
-                type="text"
-                placeholder="Subject"
-                className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm sm:text-base focus:outline-none focus:border-cyan-400 transition"
-              />
-            </div>
-
-            {/* Message */}
-            <div>
-              <label className="block text-xs sm:text-sm text-zinc-400 mb-2 uppercase tracking-wide">
-                Message
-              </label>
-              <textarea
-              name="message"
-              value={formdata.message}
-              required
-                onChange={(e)=>setformdata({...formdata,[e.target.name]:e.target.value})}
-                rows="5"
-                placeholder="Write your message..."
-                className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm sm:text-base focus:outline-none focus:border-cyan-400 transition resize-none"
-              />
-            </div>
-
-            {/* Button */}
-            <button
-              type="submit"
-              className="w-full sm:w-auto sm:px-10 py-3 rounded-lg bg-orange-500 text-black font-semibold tracking-wide hover:bg-orange-500 transition"
-            >
-              Send Message
-            </button>
-
-          </form>
-
-          {/* Decorative corners */}
-          <div className="absolute bottom-3 right-3 w-6 h-6 border-r border-b border-white/20"></div>
-          <div className="absolute bottom-3 left-3 w-2 h-2 border-l border-b border-white/20"></div>
-
+              <motion.button
+                whileHover={{ scale: 1.02, y: -4 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="w-full py-5 bg-orange-500 hover:bg-orange-400 text-black font-black uppercase tracking-widest rounded-2xl shadow-[0_10px_30px_rgba(249,115,22,0.3)] transition-all flex items-center justify-center gap-3"
+              >
+                Transmit Query <Send size={18}/>
+              </motion.button>
+            </form>
+          </motion.div>
         </div>
       </div>
     </section>
   );
-}
+}
