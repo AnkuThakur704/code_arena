@@ -1,172 +1,162 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useRef, useState } from "react";
 
 export default function Timeline() {
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"]
+    offset: ["start center", "end center"],
   });
-
-  const scaleY = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 25,
-    mass: 0.8
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
 
   const steps = [
     {
       title: "Registration Opens",
-      desc: "Participants sign up and prepare for the coding battle.",
-      time: "11 March 09:00 AM"
+      desc: "Sign up and prepare for the coding battle. Form your teams and get ready.",
+      time: "11 March 09:00 AM",
+      color: "from-orange-500 to-orange-600",
+      glowColor: "shadow-orange-500/50",
+      align: "left",
+      stepNumber: "01",
     },
     {
       title: "Contest Begins",
-      desc: "Algorithmic challenges unlock and the battle starts.",
-      time: "11 April 10:00 AM"
+      desc: "Algorithmic challenges unlock and the battle starts in the arena.",
+      time: "11 April 10:00 AM",
+      color: "from-cyan-400 to-cyan-500",
+      glowColor: "shadow-cyan-500/50",
+      align: "right",
+      stepNumber: "02",
     },
     {
       title: "Leaderboard Battle",
-      desc: "Participants compete to climb the rankings.",
-      time: "11 April"
+      desc: "Compete to climb the live rankings. Solve faster to earn more points.",
+      time: "11 April",
+      color: "from-yellow-400 to-yellow-500",
+      glowColor: "shadow-yellow-500/50",
+      align: "left",
+      stepNumber: "03",
     },
     {
       title: "Winners Announced",
-      desc: "Top performers are recognized and rewarded.",
-      time: "12 April 03:00 PM"
-    }
+      desc: "Top performers are recognized and rewarded for their coding prowess.",
+      time: "12 April 03:00 PM",
+      color: "from-purple-400 to-purple-500",
+      glowColor: "shadow-purple-500/50",
+      align: "right",
+      stepNumber: "04",
+    },
   ];
 
+  // Calculate which step is currently active (0 to steps.length - 1)
+  const activeStep = useTransform(scrollYProgress, [0, 1], [0, steps.length - 1]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useMotionValueEvent(activeStep, "change", (latest) => {
+    setActiveIndex(Math.round(latest));
+  });
+
   return (
-    <section ref={ref} className="py-24 px-6 md:px-12 bg-gradient-to-br from-slate-950 via-slate-900/50 to-purple-900/10 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto relative z-10">
-        {/* Subtle background glow */}
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 via-transparent to-indigo-500/5 -z-10 blur-3xl" />
+    <section ref={ref} className="py-24 px-6 md:px-16 overflow-hidden relative">
+      <div className="max-w-5xl mx-auto relative z-10">
         
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-24"
-        >
+        {/* Header Section */}
+        <div className="text-center mb-20">
           <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center px-8 py-4 bg-white/3 backdrop-blur-xl rounded-3xl border border-white/10 mb-8 shadow-2xl"
+            initial={{ y: -20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <div />
-            <span className="text-lg font-bold text-zinc-300 uppercase tracking-wide">Event Timeline</span>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter mb-4">
+              CONTEST <span className="text-orange-500">TIMELINE</span>
+            </h2>
+            <p className="text-zinc-400 mt-4 text-lg md:text-xl font-light tracking-wide max-w-2xl mx-auto">
+              Follow the progression of the ultimate competitive programming battle.
+            </p>
           </motion.div>
-          
-          <motion.h2
-            initial={{ scale: 0.85, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl md:text-7xl font-black bg-gradient-to-r from-white via-purple-100 to-indigo-200 bg-clip-text text-transparent leading-tight mb-6"
-          >
-            Competition Journey
-          </motion.h2>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-zinc-400 text-xl max-w-2xl mx-auto leading-relaxed"
-          >
-            Follow our carefully crafted roadmap as we bring together the brightest minds in competitive programming.
-          </motion.p>
-        </motion.div>
+        </div>
 
-        {/* Centered Timeline - Left/Right Alternating */}
-        <div className="relative">
-          {/* Central Timeline Line */}
-          <motion.div
-            style={{ scaleY, opacity }}
-            className="absolute left-1/2 transform -translate-x-1/2 top-0 w-[3px] h-full bg-gradient-to-b from-purple-400 via-pink-400 to-indigo-500 origin-top rounded-full shadow-[0_0_20px_rgba(168,85,247,0.4)] z-10"
-          />
+        <div className="relative pt-10 pb-20">
+          {/* Default Path Background line - very subtle */}
+          <div className="absolute left-[calc(2rem-1px)] md:left-1/2 top-4 bottom-4 w-[2px] bg-white/5 z-0" />
 
-          <div className="space-y-20">
-            {steps.map((step, i) => {
-              const isEven = i % 2 === 0;
-              return (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: isEven ? -60 : 60, y: 40 }}
-                  whileInView={{ opacity: 1, x: 0, y: 0 }}
-                  transition={{
-                    duration: 0.9,
-                    delay: i * 0.15,
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 18
-                  }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  className="relative flex items-center justify-center"
-                >
-                  {/* Connector line to card */}
-                  <motion.div
-                    className={`absolute w-20 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent z-20 ${isEven ? 'left-1/2 -translate-x-1/2' : 'right-1/2 translate-x-1/2'}`}
-                    style={{ top: '50%', transform: 'translateY(-50%)' }}
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    transition={{ duration: 0.6, delay: i * 0.15 + 0.3 }}
-                  />
+          <div className="space-y-16 md:space-y-32 relative">
 
-                  {/* Premium Node - Center */}
-                  <motion.div
-                   
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    whileHover={{ scale: 1.2 }}
-                    transition={{
-                      duration: 0.7,
-                      delay: i * 0.15 + 0.2,
-                      type: "spring",
-                      stiffness: 400,
-                      damping: 20
-                    }}
-                  >
-                    <div className="w-4 h-4 bg-white/20 rounded-full shadow-lg" />
-                  </motion.div>
+            {steps.map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" }}
+                className={`flex flex-col md:flex-row items-center justify-between w-full relative z-10 ${
+                  step.align === "left" ? "md:flex-row-reverse" : ""
+                }`}
+              >
+                {/* Empty space for the other side on desktop */}
+                <div className="w-5/12 hidden md:block" />
 
-                  {/* Glassmorphism Card - Alternating Sides */}
-                  <motion.div
-                    className={`max-w-lg backdrop-blur-2xl bg-white/4 hover:bg-white/8 border border-white/15 hover:border-purple-500/40 rounded-3xl p-8 md:p-10 shadow-2xl hover:shadow-3xl hover:shadow-purple-500/25 transition-all duration-700 absolute ${isEven ? '-left-80' : '-right-80'} md:relative md:${isEven ? 'ml-auto' : 'mr-auto'}`}
-                    whileHover={{
-                      y: -12,
-                      scale: 1.02,
-                      transition: { duration: 0.4, type: "spring" }
-                    }}
-                    initial={{ scale: 0.95 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: i * 0.15 + 0.5 }}
-                  >
-                    <div className="flex items-start space-x-4 mb-4">
-                      <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mt-2 animate-ping flex-shrink-0" />
-                      <h3 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-white via-zinc-100 to-purple-100 bg-clip-text leading-tight">
+                {/* Center Checkpoint Node */}
+                <div className="absolute left-8 md:static md:w-2/12 flex flex-col items-center justify-center z-20 mt-4 md:mt-0">
+                  
+                  {/* Conditionally Render the Map Pointer right above the node */}
+                  {activeIndex === i && (
+                    <motion.div 
+                      key="map-pointer"
+                      initial={{ opacity: 0, scale: 0.5, y: 10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      className="absolute inset-0 flex items-center justify-center -translate-y-5 pointer-events-none z-30"
+                    >
+                      <div className="relative flex justify-center items-center">
+                        <div className="absolute -inset-2 bg-orange-500 rounded-full blur-md opacity-50 animate-pulse"></div>
+                        <svg 
+                          className="relative w-10 h-10 md:w-12 md:h-12 text-orange-500 filter drop-shadow-[0_4px_8px_rgba(249,115,22,0.6)] animate-bounce" 
+                          fill="currentColor" 
+                          viewBox="0 0 24 24" 
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path fillRule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${activeIndex === i ? 'bg-orange-500 border-orange-400' : 'bg-zinc-900 border-zinc-700'} border-2 shadow-[0_0_10px_rgba(0,0,0,0.5)] flex items-center justify-center relative transition-colors duration-300`}>
+                    <div className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${activeIndex === i ? 'bg-white' : 'bg-zinc-500'} transition-colors duration-300`} />
+                  </div>
+                </div>
+
+                {/* Content Card */}
+                <div className="w-full pl-20 md:pl-0 md:w-5/12">
+                  <div className={`
+                    bg-white/[0.03] backdrop-blur-md border border-white/10 p-8 rounded-2xl hover:border-white/20 transition-all duration-300
+                    ${step.align === "left" ? "md:text-right" : "md:text-left"}
+                  `}>
+                    <div className={`flex flex-col ${step.align === "left" ? "md:items-end" : "md:items-start"} items-start`}>
+                      <span className={`text-5xl font-black text-white/5 mb-4 select-none`}>
+                        {step.stepNumber}
+                      </span>
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                         {step.title}
                       </h3>
+                      <p className="text-zinc-400 text-base md:text-lg font-light leading-relaxed mb-6">
+                        {step.desc}
+                      </p>
+                      
+                      <div className="inline-block bg-white/5 rounded-xl px-4 py-2 border border-white/5">
+                        <span className="text-zinc-300 text-sm font-medium tracking-wide">
+                          {step.time}
+                        </span>
+                      </div>
                     </div>
-                    <p className="text-zinc-300 text-lg leading-relaxed mb-8">
-                      {step.desc}
-                    </p>
-                    <motion.div
-                      className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600/20 via-indigo-600/20 to-purple-600/20 backdrop-blur-xl rounded-2xl border border-purple-500/40 text-purple-200 font-bold text-lg shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <span className="animate-pulse">{step.time}</span>
-                    </motion.div>
-                  </motion.div>
-                </motion.div>
-              );
-            })}
+                  </div>
+                </div>
+
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
