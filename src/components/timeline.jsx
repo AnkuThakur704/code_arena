@@ -158,7 +158,6 @@ export default function Timeline() {
               </motion.div>
             ))}
           </div>
-
         </div>
       </div>
     </section>
