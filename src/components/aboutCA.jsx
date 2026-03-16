@@ -16,7 +16,7 @@ export default function AboutCompetition() {
             viewport={{ once: true }}
             className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-2 tracking-tighter"
           >
-            About The <span className="text-orange-500">Arena</span>
+            About The <span className="text-purple-500">Arena</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0 }}
@@ -27,26 +27,26 @@ export default function AboutCompetition() {
           >
             A battlefield for logic, speed, and precision. Only the sharpest minds rise to the top of the global leaderboard.
           </motion.p>
-          <div className="h-1 w-20 bg-gradient-to-r from-orange-500 to-transparent mx-auto mt-6 opacity-40"></div>
+          <div className="h-1 w-20 bg-gradient-to-r from-purple-500 to-transparent mx-auto mt-6 opacity-40"></div>
         </div>
 
         {/* Main Content Card with Glassmorphism */}
         <div className="bg-white/[0.02] border border-white/5 backdrop-blur-3xl rounded-[2.5rem] p-8 md:p-16 relative shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden">
           {/* Decorative gradients */}
-          <div className="absolute -top-24 -left-24 w-64 h-64 bg-orange-500/10 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute -top-24 -left-24 w-64 h-64 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-magenta-500/10 rounded-full blur-[100px] pointer-events-none" />
           
           {/* Moving Data Lines */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
             <motion.div 
                animate={{ y: [-100, 500] }}
                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-               className="w-full h-px bg-gradient-to-r from-transparent via-orange-500/50 to-transparent top-0 absolute"
+               className="w-full h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent top-0 absolute"
             />
             <motion.div 
                animate={{ y: [-500, 500] }}
                transition={{ duration: 10, repeat: Infinity, ease: "linear", delay: 2 }}
-               className="w-full h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent top-0 absolute"
+               className="w-full h-px bg-gradient-to-r from-transparent via-magenta-500/30 to-transparent top-0 absolute"
             />
           </div>
 
@@ -91,13 +91,13 @@ export default function AboutCompetition() {
                 delay={0}
               />
               <FeatureCard
-                icon={<BrainCircuit className="text-cyan-400" />}
+                icon={<BrainCircuit className="text-purple-400" />}
                 title="Logic Driven"
                 desc="Problems test your understanding of complex data structures."
                 delay={0.1}
               />
               <FeatureCard
-                icon={<BarChart3 className="text-orange-400" />}
+                icon={<BarChart3 className="text-purple-400" />}
                 title="Live Leaderboard"
                 desc="Track your ranking in real time as competitors submit."
                 delay={0.2}
@@ -119,7 +119,7 @@ export default function AboutCompetition() {
 
 function FeatureCard({ icon, title, desc, floatClass }) {
   return (
-    <div className={`bg-white/5 border border-white/10 rounded-xl p-6 hover:border-cyan-400/40 transition-all duration-500 group relative ${floatClass}`}>
+    <div className={`bg-white/5 border border-white/10 rounded-xl p-6 hover:border-purple-400/40 transition-all duration-500 group relative ${floatClass}`}>
       <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-white/0 group-hover:border-white/40 transition-all" />
       <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-white/0 group-hover:border-white/40 transition-all" />
       <div className="mb-3 transition-transform group-hover:scale-110 duration-300">

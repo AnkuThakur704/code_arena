@@ -17,8 +17,8 @@ export default function Sponsors() {
   return (
     <section className="relative w-full py-32 px-6 md:px-16 overflow-hidden">
       {/* Decorative Orbs */}
-      <div className="absolute top-1/4 -left-20 w-64 h-64 bg-orange-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-20 w-64 h-64 bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 -left-20 w-64 h-64 bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-64 h-64 bg-magenta-600/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Heading */}
@@ -30,12 +30,12 @@ export default function Sponsors() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter">
-              Our <span className="text-orange-500">Sponsors</span>
+              Our <span className="text-purple-500">Sponsors</span>
             </h2>
             <p className="text-zinc-500 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
               Empowering the next generation of algorithmic pioneers through strategic collaboration.
             </p>
-            <div className="h-1 w-32 bg-gradient-to-r from-orange-500 to-transparent mx-auto mt-8 opacity-30" />
+            <div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-transparent mx-auto mt-8 opacity-30" />
           </motion.div>
         </div>
 
@@ -54,7 +54,7 @@ export default function Sponsors() {
               {marqueeLogos.map((logo, idx) => (
                 <div
                   key={idx}
-                  className="flex-shrink-0 flex items-center justify-center p-8 w-64 h-32 bg-white/[0.03] border border-white/5 rounded-2xl backdrop-blur-xl group hover:border-orange-500/40 transition-colors duration-500 relative"
+                  className="flex-shrink-0 flex items-center justify-center p-8 w-64 h-32 bg-white/[0.03] border border-white/5 rounded-2xl backdrop-blur-xl group hover:border-purple-500/40 transition-colors duration-500 relative"
                 >
                   <img
                     src={logo.icon}

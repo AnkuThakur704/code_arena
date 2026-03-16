@@ -7,7 +7,7 @@ const Countdown = () => {
     days: 0, hours: 0, minutes: 0, seconds: 0
   });
 
-  const targetDate = new Date("2026-04-11T00:00:00").getTime();
+  const targetDate = new Date("2026-04-05T00:00:00").getTime();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -32,7 +32,7 @@ const Countdown = () => {
   return (
     <section className="py-24 flex flex-col items-center justify-center bg-transparent relative overflow-hidden">
       {/* Background Hub Decoration */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
       
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -40,10 +40,10 @@ const Countdown = () => {
         viewport={{ once: true }}
         className="mb-16 flex flex-col items-center gap-4 relative z-10"
       >
-        <div className="flex items-center gap-2 px-4 py-1.5 bg-orange-500/10 border border-orange-500/20 rounded-full">
-          <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-          <span className="text-[10px] font-mono text-orange-500 uppercase tracking-[0.3em] font-bold">
-            Temporal Synchronization Active
+        <div className="flex items-center gap-2 px-4 py-1.5 bg-purple-500/10 border border-purple-500/20 rounded-full">
+          <div className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+          <span className="text-[10px] font-mono text-purple-500 uppercase tracking-[0.3em] font-bold">
+            QUANTUM UPLINK ESTABLISHED
           </span>
         </div>
         <h2 className="text-white/40 text-xs font-black uppercase tracking-[0.5em] ml-[0.5em]">Countdown to Ignition</h2>
@@ -61,8 +61,8 @@ const Countdown = () => {
 
       {/* Decorative Technical data lines */}
       <div className="mt-16 w-full max-w-sm h-px bg-gradient-to-r from-transparent via-white/10 to-transparent relative">
-        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-2 h-2 bg-orange-500/40 rounded-full blur-sm" />
-        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-2 h-2 bg-orange-500/40 rounded-full blur-sm" />
+        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-2 h-2 bg-purple-500/40 rounded-full blur-sm" />
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-2 h-2 bg-purple-500/40 rounded-full blur-sm" />
       </div>
     </section>
   );
@@ -72,7 +72,7 @@ const TimeUnit = ({ value, label }) => (
   <div className="flex flex-col items-center gap-4">
     <div className="relative group">
       {/* Glow effect */}
-      <div className="absolute -inset-4 bg-orange-500/5 rounded-3xl blur-2xl group-hover:bg-orange-500/10 transition-all duration-700" />
+      <div className="absolute -inset-4 bg-purple-500/5 rounded-3xl blur-2xl group-hover:bg-purple-500/10 transition-all duration-700" />
       
       <div className="relative w-24 h-28 md:w-40 md:h-48 bg-white/[0.02] border border-white/5 backdrop-blur-3xl rounded-3xl flex items-center justify-center overflow-hidden">
         {/* Subtle Scanline */}
@@ -95,9 +95,9 @@ const TimeUnit = ({ value, label }) => (
 
 const TimeSeparator = ({ className = "" }) => (
   <div className={`hidden sm:flex flex-col justify-center gap-3 pt-4 md:pt-12 ${className}`}>
-    <div className="w-1.5 h-1.5 rounded-full bg-orange-500/40" />
-    <div className="w-1.5 h-1.5 rounded-full bg-orange-500/40" />
+    <div className="w-1.5 h-1.5 rounded-full bg-purple-500/40" />
+    <div className="w-1.5 h-1.5 rounded-full bg-purple-500/40" />
   </div>
 );
 
-export default Countdown;
+export default Countdown;

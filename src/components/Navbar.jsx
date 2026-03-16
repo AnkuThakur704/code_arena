@@ -45,7 +45,7 @@ export default function Navbar() {
           className="text-zinc-400 hover:text-white transition-colors font-medium tracking-wide relative group"
         >
           {link.name}
-          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full" />
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full" />
         </Link>
       ))}
     </div>
@@ -83,7 +83,7 @@ export default function Navbar() {
             <NavLinks className="flex items-center gap-8" />
             <Link
               href="/CodeArena"
-              className="px-6 py-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold rounded-lg hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all hover:-translate-y-0.5"
+              className="px-6 py-2 bg-gradient-to-r from-purple-600 to-purple-500 text-white font-bold rounded-lg hover:shadow-[0_0_20px_rgba(147,51,234,0.4)] transition-all hover:-translate-y-0.5"
             >
               CodeArena'26
             </Link>
@@ -129,7 +129,7 @@ export default function Navbar() {
               <Link
                 href="/CodeArena"
                 onClick={() => setMenuOpen(false)}
-                className="px-10 py-4 bg-orange-600 text-white font-black rounded-xl text-xl animate-pulse"
+                className="px-10 py-4 bg-purple-600 text-white font-black rounded-xl text-xl animate-pulse"
               >
                 CodeArena'26
               </Link>

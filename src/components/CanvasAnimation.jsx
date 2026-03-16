@@ -1,135 +1,129 @@
 "use client";
-import { useEffect, useRef } from "react";
+import React, { useRef, useMemo } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import * as THREE from "three";
 
-const SpaceBackground = () => {
-  const canvasRef = useRef(null);
+const CosmicShader = {
+  uniforms: {
+    iTime: { value: 0 },
+    iResolution: { value: new THREE.Vector3() },
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    uniform float iTime;
+    uniform vec3 iResolution;
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    let animationFrameId;
+    // LOWERED ITERATIONS: Reduces complexity for a "cleaner" look
+    #define iterations 13
+    #define formuparam 0.53
+    
+    // LOWERED VOLSTEPS: Decreases the density of the light layers
+    #define volsteps 14
+    #define stepsize 0.1
+    #define zoom 0.850
+    #define tile 0.850
+    #define speed 0.002 
 
-    // --- Configuration ---
-    const STAR_COUNT = 200;
-    const NEBULA_COUNT = 6;
-    // Deep purples, cosmic blues, and a hint of magenta for the "smoke"
-    const nebulaColors = [
-      "rgba(93, 42, 176, 0.15)", // Deep Purple
-      "rgba(26, 42, 108, 0.12)", // Midnight Blue
-      "rgba(139, 0, 255, 0.1)",  // Electric Violet
-      "rgba(0, 210, 255, 0.08)", // Cyan Glow
-    ];
+    // LOWERED BRIGHTNESS: Makes the light less "blown out"
+    #define brightness 0.0009
+    #define darkmatter 0.400
+    #define distfading 0.760
+    #define saturation 0.900
 
-    let stars = [];
-    let nebulas = [];
+    void main() {
+      vec2 uv = gl_FragCoord.xy / iResolution.xy - .5;
+      uv.y *= iResolution.y / iResolution.x;
+      vec3 dir = vec3(uv * zoom, 1.);
+      float time = iTime * speed + .25;
 
-    const init = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      float a1 = .5;
+      float a2 = .8;
+      mat2 rot1 = mat2(cos(a1), sin(a1), -sin(a1), cos(a1));
+      mat2 rot2 = mat2(cos(a2), sin(a2), -sin(a2), cos(a2));
+      dir.xz *= rot1;
+      dir.xy *= rot2;
+      
+      vec3 from = vec3(1., .5, 0.5);
+      from += vec3(time * 2., time, -2.2);
+      from.xz *= rot1;
+      from.xy *= rot2;
+      
+      float s = 0.1, fade = 1.;
+      vec3 v = vec3(0.);
+      for (int r = 0; r < volsteps; r++) {
+        vec3 p = from + s * dir * .5;
+        p = abs(vec3(tile) - mod(p, vec3(tile * 2.)));
+        float pa, a = pa = 0.;
+        for (int i = 0; i < iterations; i++) { 
+          p = abs(p) / dot(p, p) - formuparam;
+          a += abs(length(p) - pa);
+          pa = length(p);
+        }
+        float dm = max(0., darkmatter - a * a * .001);
+        
+        a *= a * a;
+        if (r > 6) fade *= 1. - dm;
 
-      // 1. Initialize Stars
-      stars = Array.from({ length: STAR_COUNT }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 1.5 + 0.5,
-        opacity: Math.random(),
-        twinkleSpeed: Math.random() * 0.02 + 0.005,
-      }));
+        v += fade;
+        
+        // VIOLET/MAGENTA RECIPE: 
+        // We use more Red (s*s*2.5) and Blue (s*3.0) with minimal Green (s*0.3)
+        v += vec3(s * s * 2.5, s * 0.3, s * 3.0) * a * brightness * fade;
 
-      // 2. Initialize "Aura Smoke" (Nebula Clouds)
-      nebulas = Array.from({ length: NEBULA_COUNT }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 500 + 300, // Large smoke clouds
-        color: nebulaColors[Math.floor(Math.random() * nebulaColors.length)],
-        vx: (Math.random() - 0.5) * 0.3, // Slow drift X
-        vy: (Math.random() - 0.5) * 0.3, // Slow drift Y
-        pulse: 0,
-        pulseSpeed: Math.random() * 0.01,
-      }));
-    };
+        fade *= distfading;
+        s += stepsize;
+      }
+      
+      v = mix(vec3(length(v)), v, saturation);
+      
+      // Final Output: Slight dimming for better background contrast
+      gl_FragColor = vec4(v * .007, 1.0); 
+    }
+  `
+};
 
-    const draw = () => {
-      // Clear with a deep space black/blue gradient
-      const bgGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      bgGradient.addColorStop(0, "#020205");
-      bgGradient.addColorStop(1, "#050510");
-      ctx.fillStyle = bgGradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+const ShaderPlane = () => {
+  const meshRef = useRef();
+  const { size } = useThree();
+  const material = useMemo(() => new THREE.ShaderMaterial(CosmicShader), []);
 
-      // --- Draw Aura Smoke ---
-      ctx.globalCompositeOperation = "screen";
-      nebulas.forEach((n) => {
-        n.pulse += n.pulseSpeed;
-        const currentRadius = n.radius + Math.sin(n.pulse) * 50;
-
-        const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, currentRadius);
-        grad.addColorStop(0, n.color);
-        grad.addColorStop(0.5, n.color.replace("0.1", "0.05"));
-        grad.addColorStop(1, "transparent");
-
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, currentRadius, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Update Position (Drifting)
-        n.x += n.vx;
-        n.y += n.vy;
-
-        // Wrap around screen edges smoothly
-        if (n.x < -n.radius) n.x = canvas.width + n.radius;
-        if (n.x > canvas.width + n.radius) n.x = -n.radius;
-        if (n.y < -n.radius) n.y = canvas.height + n.radius;
-        if (n.y > canvas.height + n.radius) n.y = -n.radius;
-      });
-
-      // --- Draw Stars ---
-      ctx.globalCompositeOperation = "source-over";
-      stars.forEach((s) => {
-        // Twinkle effect
-        s.opacity += s.twinkleSpeed;
-        if (s.opacity > 1 || s.opacity < 0.2) s.twinkleSpeed *= -1;
-
-        ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(s.opacity)})`;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Optional: slight star drift for parallax
-        s.y += 0.05;
-        if (s.y > canvas.height) s.y = 0;
-      });
-
-      animationFrameId = requestAnimationFrame(draw);
-    };
-
-    init();
-    draw();
-
-    const handleResize = () => init();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  useFrame((state) => {
+    if (meshRef.current) {
+      material.uniforms.iTime.value = state.clock.getElapsedTime();
+      material.uniforms.iResolution.value.set(size.width, size.height, 1);
+    }
+  });
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        zIndex: -1,
-        pointerEvents: "none",
-      }}
-    />
+    <mesh ref={meshRef}>
+      <planeGeometry args={[2, 2]} />
+      <primitive object={material} attach="material" />
+    </mesh>
   );
 };
 
-export default SpaceBackground;
+const Starfield = () => {
+  return (
+    <div style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      zIndex: -1,
+      backgroundColor: "#020205" // Deep dark base
+    }}>
+      <Canvas camera={{ position: [0, 0, 1] }} gl={{ antialias: false }}>
+        <ShaderPlane />
+      </Canvas>
+    </div>
+  );
+};
+
+export default Starfield;

@@ -30,9 +30,9 @@ const PrizePool = () => {
       amount: "10,000",
       title: "Gold",
       icon: <Trophy size={56} />,
-      color: "border-orange-500",
-      text: "text-orange-500",
-      glow: "shadow-orange-600/30",
+      color: "border-purple-500",
+      text: "text-purple-500",
+      glow: "shadow-purple-600/30",
       order: "order-1 md:order-2",
       height: "h-[400px] md:h-[460px]"
     },
@@ -41,9 +41,9 @@ const PrizePool = () => {
       amount: "4,000",
       title: "Bronze",
       icon: <Award size={40} />,
-      color: "border-orange-900/50",
-      text: "text-orange-900",
-      glow: "shadow-orange-900/10",
+      color: "border-purple-900/50",
+      text: "text-purple-900",
+      glow: "shadow-purple-900/10",
       order: "order-3 md:order-3",
       height: "h-[280px] md:h-[320px]"
     }
@@ -55,9 +55,9 @@ const PrizePool = () => {
       amount: "4,000",
       title: "Rising Star",
       icon: <Award size={40} />,
-      color: "border-cyan-500/40",
-      text: "text-cyan-400",
-      glow: "shadow-cyan-500/10",
+      color: "border-magenta-500/40",
+      text: "text-magenta-400",
+      glow: "shadow-magenta-500/10",
       description: "Best Beginners Team Category"
     }
   ];
@@ -88,12 +88,12 @@ const PrizePool = () => {
           className="text-center mb-24 relative"
         >
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-2 tracking-tighter">
-            Prize <span className="text-orange-500">Pool</span>
+            Prize <span className="text-purple-500">Pool</span>
           </h2>
           <p className="text-zinc-500 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
             The ultimate bounty for computational elegance and problem-solving mastery.
           </p>
-          <div className="h-1 w-32 bg-gradient-to-r from-orange-600 to-transparent mx-auto mt-8 rounded-full" />
+          <div className="h-1 w-32 bg-gradient-to-r from-purple-600 to-transparent mx-auto mt-8 rounded-full" />
         </motion.div>
 
         <div className="flex flex-col md:flex-row items-end justify-center gap-8 md:gap-6 mb-32">
@@ -111,18 +111,18 @@ const PrizePool = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10, scale: 1.02 }}
-                className={`max-w-2xl w-full bg-white/[0.02] border-2 border-cyan-500/10 rounded-[2.5rem] p-8 md:p-12 backdrop-blur-3xl relative overflow-hidden group transition-all duration-700 hover:border-cyan-500/40 shadow-2xl hover:shadow-cyan-500/20`}
+                className={`max-w-2xl w-full bg-white/[0.02] border-2 border-magenta-500/10 rounded-[2.5rem] p-8 md:p-12 backdrop-blur-3xl relative overflow-hidden group transition-all duration-700 hover:border-magenta-500/40 shadow-2xl hover:shadow-magenta-500/20`}
               >
-                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-40 transition-all duration-700 text-cyan-400 group-hover:rotate-12">
+                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-40 transition-all duration-700 text-magenta-400 group-hover:rotate-12">
                   <Award size={80} />
                 </div>
                 
                 <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
                    <div className="flex flex-col items-center md:items-start shrink-0">
-                      <span className="text-cyan-400 text-[10px] font-black uppercase tracking-[0.4em] mb-1">GRANT TOTAL</span>
+                      <span className="text-magenta-400 text-[10px] font-black uppercase tracking-[0.4em] mb-1">GRANT TOTAL</span>
                       <div className="flex items-baseline gap-1">
-                        <span className="text-3xl font-bold text-cyan-400">₹</span>
-                        <span className="text-6xl md:text-7xl font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                        <span className="text-3xl font-bold text-magenta-400">₹</span>
+                        <span className="text-6xl md:text-7xl font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(232,121,249,0.2)]">
                           {prize.amount}
                         </span>
                       </div>
@@ -174,7 +174,7 @@ const PrizeCard = ({ prize, index }) => {
       <div className="flex-1 flex flex-col p-10 z-10 relative">
         <div className="mt-4 mb-auto">
            <h3 className="text-white text-3xl font-black italic tracking-tighter uppercase">{prize.title}</h3>
-           <div className="w-12 h-1.5 bg-current opacity-60 mt-2 rounded-full" style={{color: prize.rank === '1st' ? '#f97316' : prize.rank === '2nd' ? '#94a3b8' : '#78350f'}}></div>
+           <div className="w-12 h-1.5 bg-current opacity-60 mt-2 rounded-full" style={{color: prize.rank === '1st' ? '#a855f7' : prize.rank === '2nd' ? '#e879f9' : '#581c87'}}></div>
         </div>
         
         <div className="pb-4">

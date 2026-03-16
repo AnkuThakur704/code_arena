@@ -15,9 +15,8 @@ export default function Timeline() {
     {
       title: "Registration Opens",
       desc: "Sign up and prepare for the coding battle. Form your teams and get ready.",
-      time: "11 March 09:00 AM",
-      color: "from-orange-500 to-orange-600",
-      glowColor: "shadow-orange-500/50",
+      color: "from-purple-500 to-purple-600",
+      glowColor: "shadow-purple-500/50",
       align: "left",
       stepNumber: "01",
     },
@@ -25,8 +24,8 @@ export default function Timeline() {
       title: "Contest Begins",
       desc: "Algorithmic challenges unlock and the battle starts in the arena.",
       time: "11 April 10:00 AM",
-      color: "from-cyan-400 to-cyan-500",
-      glowColor: "shadow-cyan-500/50",
+      color: "from-magenta-400 to-magenta-500",
+      glowColor: "shadow-magenta-500/50",
       align: "right",
       stepNumber: "02",
     },
@@ -71,7 +70,7 @@ export default function Timeline() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-4">
-              CONTEST <span className="text-orange-500">TIMELINE</span>
+              CONTEST <span className="text-purple-500">TIMELINE</span>
             </h2>
             <p className="text-zinc-500 mt-4 text-lg md:text-xl font-light tracking-wide max-w-2xl mx-auto">
               Follow the progression of the ultimate competitive programming battle and mark your calendars.
@@ -84,7 +83,7 @@ export default function Timeline() {
           <div className="absolute left-[calc(2rem-1px)] md:left-1/2 top-4 bottom-4 w-[2px] bg-white/5 z-0">
             <motion.div 
               style={{ scaleY: scrollYProgress }}
-              className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-500 to-cyan-500 origin-top shadow-[0_0_15px_rgba(249,115,22,0.5)]"
+              className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-purple-500 to-magenta-500 origin-top shadow-[0_0_15px_rgba(168,85,247,0.5)]"
             />
           </div>
 
@@ -116,9 +115,9 @@ export default function Timeline() {
                       className="absolute inset-0 flex items-center justify-center -translate-y-5 pointer-events-none z-30"
                     >
                       <div className="relative flex justify-center items-center">
-                        <div className="absolute -inset-2 bg-orange-500 rounded-full blur-md opacity-50 animate-pulse"></div>
+                        <div className="absolute -inset-2 bg-purple-500 rounded-full blur-md opacity-50 animate-pulse"></div>
                         <svg 
-                          className="relative w-10 h-10 md:w-12 md:h-12 text-orange-500 filter drop-shadow-[0_4px_8px_rgba(249,115,22,0.6)] animate-bounce" 
+                          className="relative w-10 h-10 md:w-12 md:h-12 text-purple-500 filter drop-shadow-[0_4px_8px_rgba(147,51,234,0.6)] animate-bounce" 
                           fill="currentColor" 
                           viewBox="0 0 24 24" 
                           xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +130,7 @@ export default function Timeline() {
 
                   <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full border-2 z-20 flex items-center justify-center transition-all duration-500 ${
                     activeIndex === i 
-                      ? 'bg-orange-500 border-white scale-110 shadow-[0_0_20px_rgba(249,115,22,0.6)]' 
+                      ? 'bg-purple-500 border-white scale-110 shadow-[0_0_20px_rgba(147,51,234,0.6)]' 
                       : 'bg-zinc-900 border-zinc-800 scale-100'
                   }`}>
                     <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full ${activeIndex === i ? 'bg-white' : 'bg-zinc-700'} transition-colors duration-500`} />
