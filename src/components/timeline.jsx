@@ -15,6 +15,7 @@ export default function Timeline() {
     {
       title: "Registration Opens",
       desc: "Sign up and prepare for the coding battle. Form your teams and get ready.",
+      time: "17 March",
       color: "from-purple-500 to-purple-600",
       glowColor: "shadow-purple-500/50",
       align: "left",
@@ -23,7 +24,7 @@ export default function Timeline() {
     {
       title: "Contest Begins",
       desc: "Algorithmic challenges unlock and the battle starts in the arena.",
-      time: "11 April 10:00 AM",
+      time: "05 April",
       color: "from-magenta-400 to-magenta-500",
       glowColor: "shadow-magenta-500/50",
       align: "right",
@@ -32,7 +33,7 @@ export default function Timeline() {
     {
       title: "Leaderboard Battle",
       desc: "Compete to climb the live rankings. Solve faster to earn more points.",
-      time: "11 April",
+      time: "05 April",
       color: "from-yellow-400 to-yellow-500",
       glowColor: "shadow-yellow-500/50",
       align: "left",
@@ -41,7 +42,7 @@ export default function Timeline() {
     {
       title: "Winners Announced",
       desc: "Top performers are recognized and rewarded for their coding prowess.",
-      time: "12 April 03:00 PM",
+      time: "06 April",
       color: "from-purple-400 to-purple-500",
       glowColor: "shadow-purple-500/50",
       align: "right",

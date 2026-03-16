@@ -3,12 +3,9 @@ import { motion } from "framer-motion";
 
 export default function Sponsors() {
   const sponsorlogos = [
-    { name: "Google", icon: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-    { name: "Microsoft", icon: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" },
-    { name: "Amazon", icon: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-    { name: "Meta", icon: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" },
-    { name: "Nvidia", icon: "https://upload.wikimedia.org/wikipedia/commons/2/21/Nvidia_logo.svg" },
-    { name: "Intel", icon: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Intel_logo_%282020%29.svg" },
+    { name: "TUF", icon: "/sponsors/tufLogo.png" },
+    { name: "Codehurdle", icon: "/sponsors/codehurdleLogo.webp" },
+    { name: "Praksh", icon: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
   ];
 
   // Duplicate for infinite marquee
@@ -43,9 +40,9 @@ export default function Sponsors() {
         <div className="relative">
           <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
             <motion.div
-              animate={{ x: [0, -100 * sponsorlogos.length] }}
+              animate={{ x: [0, -(256 + 48) * sponsorlogos.length] }}
               transition={{
-                duration: 30,
+                duration: 20,
                 repeat: Infinity,
                 ease: "linear"
               }}
