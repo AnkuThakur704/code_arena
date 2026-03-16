@@ -29,7 +29,7 @@ export default function Sponsors() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter">
               Our <span className="text-purple-500">Sponsors</span>
             </h2>
             <p className="text-zinc-500 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">

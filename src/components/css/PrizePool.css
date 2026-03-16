@@ -1,3 +1,13 @@
+.prize-pool-section {
+  font-family: var(--font-orbitron), sans-serif;
+}
+
+.prize-pool-section p, 
+.prize-pool-section .text-zinc-500,
+.prize-pool-section .text-zinc-400 {
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
 .prize-card {
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
   overflow: hidden;

@@ -51,7 +51,7 @@ export default function QueryForm() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter">
               Query <span className="text-purple-500">Form</span>
             </h2>
             <p className="text-zinc-500 text-lg md:text-xl max-w-xl mx-auto font-light">

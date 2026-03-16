@@ -14,7 +14,7 @@ export default function AboutCompetition() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-2 tracking-tighter"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white mb-2 tracking-tighter"
           >
             About The <span className="text-purple-500">Arena</span>
           </motion.h2>
@@ -52,7 +52,7 @@ export default function AboutCompetition() {
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left Text */}
-            <div className="space-y-8 text-zinc-400 leading-relaxed text-lg">
+            <div className="space-y-8 text-zinc-400 leading-relaxed text-base md:text-lg">
               <p className="first-line:uppercase first-line:tracking-widest first-line:text-white first-line:font-black">
                 <span className="text-white font-bold">Code Arena</span> is a 
                 premier competitive programming challenge designed to test your ability 
