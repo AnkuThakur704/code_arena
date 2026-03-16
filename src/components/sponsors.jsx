@@ -5,7 +5,7 @@ export default function Sponsors() {
   const sponsorlogos = [
     { name: "TUF", icon: "/sponsors/tufLogo.png" },
     { name: "Codehurdle", icon: "/sponsors/codehurdleLogo.webp" },
-    { name: "Praksh", icon: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+    { name: "Praksh", icon: "/sponsors/prakshaLogo.png" },
   ];
 
   // Duplicate for infinite marquee
